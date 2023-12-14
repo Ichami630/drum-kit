@@ -3,7 +3,13 @@ for(var i=0;i<document.querySelectorAll(".drum").length;i++){
     document.querySelectorAll(".drum")[i].addEventListener("click",function(){
         var innerTex=this.innerHTML;
         playSound(innerTex);
+        buttonAnimation(innerTex)
     })
+
+    document.addEventListener("keypress",function(event){
+    playSound(event.key);
+    buttonAnimation(event.key);
+})
 
 }
 
@@ -42,7 +48,13 @@ function playSound(key){
         break;
     }
 }
-document.addEventListener("keypress",function(event){
-    playSound(event.key);
-})
+
+//button animations with timeout
+function buttonAnimation(currentKey){
+    var activeButton=document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed")
+    },100)
+}
 
